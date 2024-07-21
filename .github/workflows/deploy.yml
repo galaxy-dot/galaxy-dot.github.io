@@ -22,7 +22,7 @@ jobs:
       run: npm install
     
     - name: List source directory
-    run: ls -R source
+      run: ls -R source
 
     - name: Print Node.js version
       run: node -v
@@ -41,7 +41,6 @@ jobs:
         ls -la public
         echo "Content of public/index.html:"
         cat public/index.html
-
 
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
