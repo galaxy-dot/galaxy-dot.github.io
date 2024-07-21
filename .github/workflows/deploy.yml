@@ -1,0 +1,45 @@
+name: Deploy Hexo site
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Use the version compatible with your Hexo setup
+
+    - name: Install Hexo and plugins
+      run: npm install
+
+    - name: Generate static files
+      run: npx hexo generate
+
+    - name: Deploy to GitHub Pages
+      env:
+        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        npx hexo deploy
+
+    # Uncomment this step if you want to build the site in a custom directory and push to a branch other than `gh-pages`
+    # - name: Deploy to custom branch
+    #   run: |
+    #     mkdir -p public
+    #     mv * public
+    #     cd public
+    #     git init
+    #     git remote add origin https://github.com/<USERNAME>/<REPO>.git
+    #     git add .
+    #     git commit -m "Deploy site"
+    #     git push --force origin master:gh-pages
