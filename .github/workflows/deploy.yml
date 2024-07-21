@@ -20,6 +20,18 @@ jobs:
 
     - name: Install Hexo and plugins
       run: npm install
+    
+    - name: List source directory
+    run: ls -R source
+
+    - name: Print Node.js version
+      run: node -v
+
+    - name: Print npm version
+      run: npm -v
+
+    - name: List installed npm packages
+      run: npm list
 
     - name: Clean and generate static files
       run: |
