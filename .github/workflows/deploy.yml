@@ -21,8 +21,8 @@ jobs:
     - name: Install Hexo and plugins
       run: npm install
 
-    - name: Generate static files
-      run: npx hexo generate
+    - name: Clean and generate static files
+      run: npx hexo clean && npx hexo generate
 
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
