@@ -103,5 +103,5 @@ theme: next
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
  type: git
- repo: https://github.com/galaxy-dot/galaxy-dot.github.io
+ repo: git@github.com:galaxy-dot/galaxy-dot.github.io
  branch: gh-pages
