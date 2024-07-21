@@ -22,7 +22,14 @@ jobs:
       run: npm install
 
     - name: Clean and generate static files
-      run: npx hexo clean && npx hexo generate
+      run: |
+        npx hexo clean
+        npx hexo generate
+        echo "Generated files in public directory:"
+        ls -la public
+        echo "Content of public/index.html:"
+        cat public/index.html
+
 
     - name: Setup SSH
       uses: webfactory/ssh-agent@v0.5.3
