@@ -56,7 +56,7 @@
 
 ```
 git fetch origin
-git reset --hard origin/master
+git reset --hard origin/main
 ```
 
 ### 3. 怎么使用选定的 NexT 主题
@@ -80,10 +80,10 @@ git reset --hard origin/master
 
 | 类别       | github 仓库地址                                                 | host 静态页面的 branch |
 | ---------- | --------------------------------------------------------------- | ---------------------- |
-| user 类    | `https://github.com/ <你的 github 用户名>/<你的 github 用户名>` | master                 |
+| user 类    | `https://github.com/ <你的 github 用户名>/<你的 github 用户名>` | gh-pages                 |
 | project 类 | `https://github.com/ <你的 github 用户名>/<你的 项目名>`        | gh-pages               |
 
-我的这个 site 是 user 类。因此我创建了一个 `hexo` 分支来存储 blog 源码。  
+我的这个 site 是 user 类。我用 `main` 分支来存储 blog 源码，用 `gh-pages` 分支来储存生成的静态页面 。  
 接着我们就可以遵循正常 git push 流程把本地文件 push 到相应的 branch 上。
 
 关于步骤 2，我最开始使用了`Travis-CI`， 后来因为 credit 超了，转而用`Github Action`。以下分别记录这 2 个工具的设置。
@@ -108,7 +108,7 @@ git reset --hard origin/master
 
 - [使用 GitHub Actions 自动部署 Hexo 博客 - 上篇](https://oreo.life/deploy-hexo-with-github-actions-1/#%E8%BD%AE%E5%AD%90%E5%86%8D%E9%80%A0-%E4%BD%BF%E7%94%A8-github-actions-%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2-hexo-%E5%8D%9A%E5%AE%A2---%E4%B8%8A%E7%AF%87) - 参考了 submodule 设置
 
-具体设置文件可以参考这个 repo 里对应的`.github/workflows/hexo-blog-ci.yml`文档。
+具体设置文件可以参考这个 repo 里对应的`.github/workflows/deploy.yml`文档。
 
 ### TODO：project 类 ~~travis-ci~~Github Action 设置，等以后用到了再写。
 
