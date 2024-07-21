@@ -20,6 +20,12 @@ jobs:
 
     - name: Install Hexo and plugins
       run: npm install
+
+    - name: List themes directory
+      run: ls -la themes
+  
+    - name: List NexT theme directory
+      run: ls -la themes/next
     
     - name: List source directory
       run: ls -R source
