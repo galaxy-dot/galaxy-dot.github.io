@@ -72,8 +72,8 @@ git reset --hard origin/main
 
 ## 怎么把本地 blog 上传到 github 以及完成自动部署
 
-这里分为 2 大步骤：
-步骤 1: 把本地文件上传到 github 上
+这里分为 2 大步骤：  
+步骤 1: 把本地文件上传到 github 上   
 步骤 2: 利用一些 CI/CD 工具/平台，比如`Travis-CI`, `Github Action` 等来完成自动部署。
 
 在开始步骤 1 之前，需要先了解一下[不同种类的 github pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages#types-of-github-pages-sites)。总结来说，一般个人账户下有 2 类不同的 github pages，参考下表。
@@ -90,11 +90,11 @@ git reset --hard origin/main
 
 ### 如何连接 `Travis-CI` 完成自动部署
 
-`Travis-CI` 完成自动部署文件可以参考[官方文档](https://docs.travis-ci.com/user/deployment/pages/)，也可以参考这个 repo 里对应的`.travis.yml`文档。注意要修改 branch hexo 到你对应的 branch。
+`Travis-CI` 完成自动部署文件可以参考[官方文档](https://docs.travis-ci.com/user/deployment/pages/)，也可以参考这个 repo 里对应的`.travis.yml`文件。注意要修改 branch hexo 到你对应的 branch。
 
 因为我们已经利用的 `travis-ci` 来完成部署，因此可以 comment 掉 blog 根目录下`_config.yml`文件中`# Deployment` 部分。
 
-因为 Travis 免费使用到期，无法继续使用，因此我有研究了如何用 Github Action 部署，见下一部分。
+后来 Travis 免费使用到期，无法继续使用，因此我研究了如何用 Github Action 部署，见下一部分。
 
 ### 如何连接 `Github Action` 完成自动部署
 
@@ -104,11 +104,42 @@ git reset --hard origin/main
 
 - [hexo github pages 官方文档](https://hexo.io/docs/github-pages) - 参考了 Set Another GitHub Pages Branch publish_branch，example yml 文件，submodule 设置
 
-- [使用 GitHub Actions 部署 Hexo 博客](https://www.nuke666.cn/2021/03/deploy-hexo-using-github-actions/) - 了解了 Github Action 如何运作
-
 - [使用 GitHub Actions 自动部署 Hexo 博客 - 上篇](https://oreo.life/deploy-hexo-with-github-actions-1/#%E8%BD%AE%E5%AD%90%E5%86%8D%E9%80%A0-%E4%BD%BF%E7%94%A8-github-actions-%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2-hexo-%E5%8D%9A%E5%AE%A2---%E4%B8%8A%E7%AF%87) - 参考了 submodule 设置
 
 具体设置文件可以参考这个 repo 里对应的`.github/workflows/deploy.yml`文档。
+分解为5步：
+1. clone 博客源码。注意要添加`submodules: 'true'`因为我们的主题是利用`submodule`引入的，这样才可以把主题一起clone到Github Actions的运行环境中。
+```
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'true'
+```
+2. 配置 Node.js 环境
+```
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'  # Use the version compatible with your Hexo setup
+```
+3. 配置 Hexo 环境
+```
+    - name: Install Hexo and plugins
+      run: npm install
+```
+4. 使用 hexo generate 生成静态网页
+```
+    - name: Clean and generate static files
+      run: |
+        npx hexo generate
+        echo "Generated files in public directory:"
+        ls -la public
+```
+5. 将 public/ 目录下的静态网页部署到 GitHub Pages
+
+一些重点注意事项罗列如下
+- 在repo里`Settings` -> `Pages` -> `Build and deployment` -> `source` 选择 `Deploy from a branch`，默认 branch 名为 `gh-pages`.
+
 
 ### TODO：project 类 ~~travis-ci~~Github Action 设置，等以后用到了再写。
 

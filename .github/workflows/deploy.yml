@@ -25,24 +25,21 @@ jobs:
 
     - name: Clean and generate static files
       run: |
-        npx hexo clean
         npx hexo generate
         echo "Generated files in public directory:"
         ls -la public
-        echo "Content of public/index.html:"
-        cat public/index.html
 
-    - name: Setup SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+    # - name: Setup SSH
+    #   uses: webfactory/ssh-agent@v0.5.3
+    #   with:
+    #     ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
-    - name: Deploy to GitHub Pages
-      run: |
-        git config --global init.defaultBranch main
-        git config --global user.name "github-actions[bot]"
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        npx hexo deploy
+    # - name: Deploy to GitHub Pages
+    #   run: |
+    #     git config --global init.defaultBranch main
+    #     git config --global user.name "github-actions[bot]"
+    #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    #     npx hexo deploy
 
     # Uncomment this step if you want to build the site in a custom directory and push to a branch other than `gh-pages`
     # - name: Deploy to custom branch
