@@ -135,10 +135,21 @@ git reset --hard origin/main
         echo "Generated files in public directory:"
         ls -la public
 ```
-5. 将 public/ 目录下的静态网页部署到 GitHub Pages
+5. 将 public/ 目录下的静态网页部署到 GitHub Pages。原理是通过SSH，把public/ 目录下的文件复制到`gh-pages` 分支，然后再利用Github Pages 自带的workflow `pages build and deployment` 进行deploy。
+```
+    - name: Setup SSH
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
 
-一些重点注意事项罗列如下
-- 在repo里`Settings` -> `Pages` -> `Build and deployment` -> `source` 选择 `Deploy from a branch`，默认 branch 名为 `gh-pages`.
+    - name: Deploy to GitHub Pages
+      run: |
+        git config --global init.defaultBranch main
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        npx hexo deploy
+```
+这一步中还需要在repo里`Settings` -> `Pages` -> `Build and deployment` -> `source` 选择 `Deploy from a branch`，默认 branch 名为 `gh-pages`. 在这种情况下，Github Actions 会自动添加一个workflow `pages build and deployment`。这个flow的作用是把`gh-pages` branch里的文件deploy到Github Pages，也就是这个Blog的[链接](https://galaxy-dot.github.io/)。
 
 
 ### TODO：project 类 Github Action 设置，等以后用到了再写。
