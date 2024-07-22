@@ -90,11 +90,11 @@ git reset --hard origin/main
 
 ### 如何连接 `Travis-CI` 完成自动部署
 
-`Travis-CI` 完成自动部署文件可以参考[官方文档](https://docs.travis-ci.com/user/deployment/pages/)，也可以参考这个 repo 里对应的`.travis.yml`文件。注意要修改 branch hexo 到你对应的 branch。
+~~`Travis-CI` 完成自动部署文件可以参考[官方文档](https://docs.travis-ci.com/user/deployment/pages/)，也可以参考这个 repo 里对应的`.travis.yml`文件。注意要修改 branch hexo 到你对应的 branch。~~
 
-因为我们已经利用的 `travis-ci` 来完成部署，因此可以 comment 掉 blog 根目录下`_config.yml`文件中`# Deployment` 部分。
+~~因为我们已经利用的 `travis-ci` 来完成部署，因此可以 comment 掉 blog 根目录下`_config.yml`文件中`# Deployment` 部分。~~
 
-后来 Travis 免费使用到期，无法继续使用，因此我研究了如何用 Github Action 部署，见下一部分。
+因为Travis 免费使用到期，无法继续使用，因此我研究了如何用 Github Action 部署，见下一部分。
 
 ### 如何连接 `Github Action` 完成自动部署
 
@@ -141,7 +141,7 @@ git reset --hard origin/main
 - 在repo里`Settings` -> `Pages` -> `Build and deployment` -> `source` 选择 `Deploy from a branch`，默认 branch 名为 `gh-pages`.
 
 
-### TODO：project 类 ~~travis-ci~~Github Action 设置，等以后用到了再写。
+### TODO：project 类 Github Action 设置，等以后用到了再写。
 
 ## 各种 feature 设置
 
