@@ -4,6 +4,7 @@
 
 - 2022.05.12 添加如何使用`Github Action`进行自动部署。
 - 2022.07.09 使用自定义字体
+- 2024.07.23 添加Google Analytics and Firebase view counts
 
 ## 安装 hexo
 
