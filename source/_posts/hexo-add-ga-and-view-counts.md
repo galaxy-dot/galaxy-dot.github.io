@@ -34,3 +34,5 @@ Following [instructions](https://theme-next.js.org/docs/third-party-services/sta
 
 1. [Statistics and Analytics](
 https://theme-next.js.org/docs/third-party-services/)
+2. [Add Article Views to Your Hexo Blog](https://qiuyiwu.github.io/2019/01/26/Hexo-View/)
+3. [Hexo NexT 主題的閱讀次數統計](https://blog.maple3142.net/2017/11/04/hexo-next-readcount/)
